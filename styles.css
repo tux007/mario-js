@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #5C94FC, #87CEEB);
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}   
+
+.game-container {    
+    background-color: #fff;
+    border: 3px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px #000;
+}
+
+.ui {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 800px;
+}
+
+#game-area {
+    width: 800px;
+    height: 400px;
+    background: linear-gradient(to bottom, #5C94FC 80%, #228B22 80%, #228B22 100%);
+    border: 2px solid #333;
+    overflow: hidden;
+}
+
+#mario {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url('./assets/mario.png');
+    z-index: 100;
+}
+
+#mario.big {
+    width: 40px;
+    height: 40px;
+    background-image: url('./assets/mario.png');
+}
+
+.platform {
+    background-image: url('./assets/platform.png');
+    width: 20px;
+    height: 20px;
+}
+
+.platform.ground {
+    background-image: url('./assets/patform_ground.png');
+    width: 20px;
+    height: 20px;
+}
+
+.platform.blue {
+    background-image: url('./assets/platform_blue.png');
+    width: 20px;
+    height: 20px;
+}
