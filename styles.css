@@ -27,6 +27,7 @@ body {
 }
 
 #game-area {
+    position: relative;
     width: 800px;
     height: 400px;
     background: linear-gradient(to bottom, #5C94FC 80%, #228B22 80%, #228B22 100%);
@@ -60,13 +61,19 @@ body {
     height: 20px;
 }
 
+.platform.floating {
+    background-image: url('./assets/patform_ground.png');
+    width: 20px;
+    height: 20px;
+}
+
 .platform.blue {
     background-image: url('./assets/platform_blue.png');
     width: 20px;
     height: 20px;
 }
 
-.enemy {
+.enemy.brown {
     background-image: url('./assets/enemy.png');
     width: 20px;
     height: 20px;
