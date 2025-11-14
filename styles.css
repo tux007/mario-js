@@ -50,24 +50,28 @@ body {
 }
 
 .platform {
+    position: absolute;
     background-image: url('./assets/platform.png');
     width: 20px;
     height: 20px;
 }
 
 .platform.ground {
+    position: absolute;
     background-image: url('./assets/patform_ground.png');
     width: 20px;
     height: 20px;
 }
 
 .platform.floating {
+    position: absolute;
     background-image: url('./assets/patform_ground.png');
     width: 20px;
     height: 20px;
 }
 
 .platform.blue {
+    position: absolute;
     background-image: url('./assets/platform_blue.png');
     width: 20px;
     height: 20px;
