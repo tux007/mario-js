@@ -105,12 +105,12 @@ function initGame() {
 
 function loadLevel(levelIndex) {
     if (levelIndex >= levels.length) {
-        // showGameOver(true)
+        showGameOver(true)
         return
     }
 
     // Clearing existing objects
-    // clearLevel()
+    clearLevel()
 
         const level = levels[levelIndex];
         const gameArea = document.getElementById('game-area');
@@ -154,6 +154,57 @@ function createElement(type, className, styles = {}) {
     element.className = className;
     Object.assign(element.style, styles);
     return element;
+}
+
+function showGameOver(won) {
+    gameState.gameRunning = false;
+    document.getElementById('game-over').textContent = won ? 'Congratulations! You Won!' : 'Game Over!';
+    document.getElementById('final-score').textContent = gameState.score;
+    document.getElementById('game-over').style.display = 'block';
+}
+
+function clearLevel() {
+    //const gameArea = document.getElementById('game-area');
+
+    Object.values(gameObjects). flat().forEach(obj => {
+
+        if (obj.element && obj.element.parentNode) {
+            obj.element.remove();
+        }
+    });
+    gameObjects = {
+        platforms: [],
+        enemies: [],
+        coins: [],
+        surpriseBlocks: [],
+        pipes: []
+    }
+}
+
+// Input handling
+document.addEventListener('keydown', (e) => {
+    gameState.keys[e.code] = true;
+
+    if (e.code === "Space") {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('keyup', (e) => {
+    gameState.keys[e.code] = false;
+});
+
+// Game loop
+function gameLoop() {
+    if (!gameState.gameRunning) return;
+
+    update();
+    requestAnimationFrame(gameLoop);
+}
+
+// Update game logic
+function update() {
+   
 }
 
 // Start the game
