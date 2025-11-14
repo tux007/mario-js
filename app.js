@@ -16,7 +16,7 @@ let gameState = {
 let player = {
     element: document.getElementById('mario'),
     x: 50,
-    y: 300,
+    y: 340,
     width: 20,
     height: 20,
     velocityX: 0,
@@ -48,8 +48,8 @@ const levels = [
             
         ],
         enemies: [
-            { x:250, y: 344, type: 'brown' },
-            { x:550, y: 344, type: 'brown' }
+            { x:250, y: 340, type: 'brown' },
+            { x:550, y: 340, type: 'brown' }
         ],
         coins: [
             { x: 220, y: 260 },
@@ -76,8 +76,8 @@ const levels = [
             { x: 550, y: 280, width: 60, height: 20, type: 'blue' }
         ],
         enemies: [
-            { x:350, y: 344, type: 'purple' },
-            { x:650, y: 344, type: 'purple' },
+            { x:350, y: 340, type: 'purple' },
+            { x:650, y: 340, type: 'purple' },
             { x:570, y: 264, type: 'purple' }
         ],
         coins: [
@@ -92,7 +92,7 @@ const levels = [
             { x: 400, y: 220, type: 'mushroom' }
         ],
         pipes: [
-            { x: 750, y: 300 }
+            { x: 750, y: 320 }
         ]
     }
 ]
@@ -117,7 +117,7 @@ function loadLevel(levelIndex) {
 
         // Reset player
         player.x = 50
-        player.y = 300
+        player.y = 340
         player.velocityX = 0
         player.velocityY = 0
         player.big = false
@@ -195,6 +195,31 @@ function loadLevel(levelIndex) {
                 type: blockData.type,
                 hit: false,
                 id: 'block-' + index
+             });
+        });
+
+        // Create pipes
+        level.pipes.forEach((pipeData, index) => {
+            const pipe = createElement('div', 'pipe', {
+                left: pipeData.x + 'px',
+                top: pipeData.y + 'px',
+            });
+            
+            const pipeTopLeft = createElement('div', 'pipe-top');
+            const pipeTopRight = createElement('div', 'pipe-top-right');
+            const pipeBottomLeft = createElement('div', 'pipe-bottom');
+            const pipeBottomRight = createElement('div', 'pipe-bottom-right');
+
+            pipe.append(pipeTopLeft, pipeTopRight, pipeBottomLeft, pipeBottomRight);
+            
+            gameArea.appendChild(pipe);
+            gameObjects.pipes.push({ 
+                element: pipe, 
+                x: pipeData.x, 
+                y: pipeData.y, 
+                width: 40, 
+                height: 40,
+                id: 'pipe-' + index
              });
         });
 
