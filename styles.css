@@ -78,18 +78,21 @@ body {
 }
 
 .enemy.brown {
+    position: absolute;
     background-image: url('./assets/enemy.png');
     width: 20px;
     height: 20px;
 }
 
 .enemy.purple {
+    position: absolute;
     background-image: url('./assets/enemy_purple.png');
     width: 20px;
     height: 20px;
 }
 
 .coin {
+    position: absolute;
     background-image: url('./assets/coin.png');
     width: 20px;
     height: 20px;
@@ -102,41 +105,48 @@ body {
 }
 
 .surprise-block {
+    position: absolute;
     background-image: url('./assets/surprise_block.png');
     width: 20px;
     height: 20px;
 }
 
 .surprise-block.hit {
+    position: absolute;
     background-image: url('./assets/surprise_block_hit.png');
     width: 20px;
     height: 20px;
 }
 
 .pipe {
+    position: absolute;
     width: 40px;
     height: 40px;
 }
 
 .pipe-top {
+    position: absolute;
     background-image: url('./assets/pipe_top.png');
     width: 40px;
     height: 60px;
 }
 
 .pipe-top-right {
+    position: absolute;
     background-image: url('./assets/pipe_top_right.png');
     width: 40px;
     height: 60px;
 }
 
 .pipe-bottom {
+    position: absolute;
     background-image: url('./assets/pipe_bottom.png');
     width: 40px;
     height: 60px;
 }
 
 .pipe-bottom-right {
+    position: absolute;
     background-image: url('./assets/pipe_bottom_right.png');
     width: 40px;
     height: 60px;
