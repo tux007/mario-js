@@ -285,8 +285,56 @@ function gameLoop() {
 
 // Update game logic
 function update() {
-   
+   console.log(gameState.keys);
+    // Handles left and right movement
+    if (gameState.keys['ArrowLeft'] || gameState.keys['KeyA']) {
+        player.velocityX = -MOVE_SPEED;
+    } else if (gameState.keys['ArrowRight'] || gameState.keys['KeyD']) {
+        player.velocityX = MOVE_SPEED;
+    } else {
+        player.velocityX *= 0.8;
+    }
+
+    // Handle jumping
+
+    if (gameState.keys['Space'] && player.grounded) {
+        player.velocityY = JUMP_FORCE;
+        player.grounded = false;
+    }
+
+    // Apply gravity
+    if (!player.grounded) {
+        player.velocityY += GRAVITY;
+    }
+
+    // Update player position
+    player.x += player.velocityX;
+    player.y += player.velocityY;
+
+    // Platform collision
+    player.grounded = false;
+    for (let platform of gameObjects.platforms) {
+        if (checkCollision(player, platform)) {
+            if (player.velocityY > 0) {
+                player.y = platform.y - player.height;
+                player.velocityY = 0;
+                player.grounded = true;
+            }
+        }  
+
+    }
+
+    updateElementPosition(player.element, player.x, player.y);
+
 }
+
+function checkCollision(element1, element2) {
+    return element1.x < element2.x + element2.width &&
+           element1.x + element1.width > element2.x &&
+           element1.y < element2.y + element2.height &&
+           element1.y + element1.height > element2.y;
+}
+
 
 // Start the game
 initGame();
