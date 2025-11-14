@@ -285,7 +285,7 @@ function gameLoop() {
 
 // Update game logic
 function update() {
-   console.log(gameState.keys);
+   //console.log(gameState.keys);
     // Handles left and right movement
     if (gameState.keys['ArrowLeft'] || gameState.keys['KeyA']) {
         player.velocityX = -MOVE_SPEED;
@@ -315,7 +315,7 @@ function update() {
     player.grounded = false;
     for (let platform of gameObjects.platforms) {
         if (checkCollision(player, platform)) {
-            if (player.velocityY > 0) {
+            if (player.velocityY > 0) { // Falling
                 player.y = platform.y - player.height;
                 player.velocityY = 0;
                 player.grounded = true;
@@ -324,6 +324,69 @@ function update() {
 
     }
 
+    // Pipe collision
+    for (let pipe of gameObjects.pipes) {
+        if (checkCollision(player, pipe)) {
+            if (player.velocityY > 0) { // Falling down onto Pipe
+                player.y = pipe.y - player.height;
+                player.velocityY = 0;
+                player.grounded = true;
+            }
+        }
+    }
+
+    // Enemy collision and movements
+    for (let enemy of gameObjects.enemies) {
+        if (!enemy.alive) continue;
+
+        // Move enemy
+        enemy.x += enemy.direction * enemy.speed;
+
+        let onPlatform = false;
+        // Reverse direction at platform edges or boundaries
+        for (let platform of gameObjects.platforms) {
+            if (enemy.x + enemy.width > platform.x && 
+                enemy.x < platform.x + platform.width &&
+                enemy.y + enemy.height >= platform.y -5 &&
+                enemy.y + enemy.height <= platform.y +5
+            ) {
+                onPlatform = true;
+                break;
+            }
+        }
+
+        if (!onPlatform || enemy.x <= 0 || enemy.x >=800 ) {
+            enemy.direction *= -1;
+        }
+
+        updateElementPosition(enemy.element, enemy.x, enemy.y);
+
+        // Check player-enemy collision
+        if (checkCollision(player, enemy)) {
+            if (player.velocityY > 0 && player.y < enemy.y) {
+                //Jump on enemy
+                enemy.alive = false;
+                enemy.element.remove();
+                player.velocitiyY = JUMP_FORCE * 0.7;
+                gameState.score += 200;
+            } else {
+                // Hit by enemy
+                if (player.big) {
+                    player.big = false;
+                    player.bigTimer = 0;
+                    player.element.classList.remove('big');
+                    player.width = 20;
+                    player.height = 20;
+                } else {
+                    // loseLife()
+                }
+            }
+        }
+        
+        // Coin collection
+
+    }
+     
     updateElementPosition(player.element, player.x, player.y);
 
 }
