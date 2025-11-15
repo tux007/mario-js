@@ -383,7 +383,7 @@ function update() {
           player.element.classList.remove("big");
           player.width = 20;
           player.height = 20;
-        } else {
+        } else if (player.grounded) {
           loseLife()
         }
       }
@@ -469,11 +469,13 @@ function spawnItemOnBox(block, type) {
         width: 20,
         height: 20,
         element: item,
-        velocityY: 0
+        velocityY: 0,
+        frames: 0
     }
 
     if (type === 'mushroom') {
-        const fallIntervall = setInterval(() => {
+
+        function fall() {
             itemObj.velocityY += GRAVITY;
             itemObj.y += itemObj.velocityY;
 
@@ -488,29 +490,36 @@ function spawnItemOnBox(block, type) {
                     onPlatform = true;
                     itemObj.y = platform.y - itemObj.height;
                     itemObj.velocityY = 0;
+                    item.remove();
                     break;
                 }
             }
 
             item.style.top = itemObj.y + "px";
 
-            if (onPlatform) {
-                clearInterval(fallIntervall);
+            if (!onPlatform) {
+                requestAnimationFrame(fall);
             }
-        }, 16)
+        }
+
+        fall();
+
+        
 
     } else if (type === 'coin') {
-        let frames = 0;
 
-        const floatInterval = setInterval(() => {
+        function floatUp() {
             itemObj.y -= 1;
             item.style.top = itemObj.y + "px";
-            frames++;
-            if (frames >= 180) {
-                clearInterval(floatInterval);
+            itemObj.frames++;
+            if (itemObj.frames < 180) {
+                requestAnimationFrame(floatUp);                
+            } else {
                 item.remove();
             }
-        }, 60)
+        }
+
+        floatUp();
     }
 }
 
@@ -538,6 +547,9 @@ function nextLevel() {
     if (gameState.level > levels.length) {
         showGameOver(true);
     } else {
+        player.element.classList.remove("big");
+        player.width = 20;
+        player.height = 20;
         loadLevel(gameState.level - 1);
     }
 }
