@@ -54,29 +54,29 @@ body {
 .platform {
     position: absolute;
     background-image: url('./assets/platform.png');
-    width: 20px;
-    height: 20px;
+    background-size: 20px 20px;
+    background-repeat: repeat;
 }
 
 .platform.ground {
     position: absolute;
     background-image: url('./assets/patform_ground.png');
-    width: 20px;
-    height: 20px;
+    background-size: 20px 20px;
+    background-repeat: repeat;
 }
 
 .platform.floating {
     position: absolute;
     background-image: url('./assets/patform_ground.png');
-    width: 20px;
-    height: 20px;
+    background-size: 20px 20px;
+    background-repeat: repeat;
 }
 
 .platform.blue {
     position: absolute;
     background-image: url('./assets/platform_blue.png');
-    width: 20px;
-    height: 20px;
+    background-size: 20px 20px;
+    background-repeat: repeat;
 }
 
 .enemy.brown {
@@ -88,6 +88,8 @@ body {
 
 .enemy.purple {
     position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
     background-image: url('./assets/enemy_purple.png');
     width: 20px;
     height: 20px;
@@ -128,6 +130,8 @@ body {
 
 .pipe-top {
     position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
     top: 0;
     left: 0;
     background-image: url('./assets/pipe_top.png');
@@ -137,6 +141,8 @@ body {
 
 .pipe-top-right {
     position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
     top: 0;
     right: 0;
     background-image: url('./assets/pipe_top_right.png');
@@ -146,6 +152,8 @@ body {
 
 .pipe-bottom {
     position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
     bottom: 0;
     left: 0;
     background-image: url('./assets/pipe_bottom.png');
@@ -155,6 +163,8 @@ body {
 
 .pipe-bottom-right {
     position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
     bottom: 0;
     right: 0;
     background-image: url('./assets/pipe_bottom_right.png');
@@ -172,7 +182,7 @@ body {
     position: absolute;
     top: 20%;
     border: 3px solid #fff;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     padding: 30px;
     border-radius: 10px;
