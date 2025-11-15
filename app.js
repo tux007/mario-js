@@ -404,6 +404,8 @@ function update() {
     if (!block.hit && checkCollision(player, block) && player.velocityY < 0) {
       block.hit = true;
       block.element.classList.add("hit");
+      spawnItemOnBox(block, block.type);
+
 
       if (block.type === "mushroom") {
         player.big = true;
@@ -471,6 +473,31 @@ function spawnItemOnBox(block, type) {
     }
 
     if (type === 'mushroom') {
+        const fallIntervall = setInterval(() => {
+            itemObj.velocityY += GRAVITY;
+            itemObj.y += itemObj.velocityY;
+
+            let onPlatform = false;
+            for (let platform of gameObjects.platforms) {
+                if (
+                    itemObj.x < platform.x + platform.width &&
+                    itemObj.x + itemObj.width > platform.x &&
+                    itemObj.y + itemObj.height >= platform.y &&
+                    itemObj.y + itemObj.height <= platform.y + 5
+                ) {
+                    onPlatform = true;
+                    itemObj.y = platform.y - itemObj.height;
+                    itemObj.velocityY = 0;
+                    break;
+                }
+            }
+
+            item.style.top = itemObj.y + "px";
+
+            if (onPlatform) {
+                clearInterval(fallIntervall);
+            }
+        }, 16)
 
     } else if (type === 'coin') {
         let frames = 0;

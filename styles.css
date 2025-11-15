@@ -95,6 +95,13 @@ body {
     height: 20px;
 }
 
+.mushroom {
+    position: absolute;
+    background-image: url('./assets/mushroom.png');
+    width: 20px;
+    height: 20px;
+}
+
 .coin {
     position: absolute;
     background-image: url('./assets/coin.png');
