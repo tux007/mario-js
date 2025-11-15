@@ -384,6 +384,43 @@ function update() {
         }
         
         // Coin collection
+        for (let coin of gameObjects.coins) {
+            if (!coin.collected && checkCollision(player, coin)) {
+                coin.collected = true;
+                coin.element.remove();
+                gameState.score += 50;
+            }   
+        }
+
+        // Surprise blocks
+        for (let block of gameObjects.surpriseBlocks) {
+            if (!block.hit && checkCollision(player, block) && player.velocityY < 0) {
+                block.hit = true;
+                block.element.classList.add('hit');
+
+                if (block.type === 'mushroom') {
+                    player.big = true;
+                    player.bigTimer = 600;
+                    player.element.classList.add('big');
+                    player.width = 30;
+                    player.height = 30;
+                    gameState.score += 100;
+                } else if (block.type === 'coin') {
+                    gameState.score += 50;
+                }
+            }
+        }
+
+        // Pipe interaction to next level
+        for (let pipe of gameObjects.pipes) {
+            if (player.grounded &&
+                player.x + player.width > pipe.x &&
+                player.x < pipe.x + pipe.width &&
+                Math.abs(player.y + player.height - pipe.y) < 5 &&
+                gameState.keys['ArrowDown']) {
+                    // nextLevel()
+                } 
+        }
 
     }
      
